@@ -27,8 +27,16 @@
     return ['rgb(', name, ')'].join('');
   };
 
+  var makeRawRGB = function(name){
+	return name.split(',');	
+  }
+
   var mapPalette = function(palette){
     return palette.map(function(c){ return makeRGB(c.name) })
+  }
+
+  var mapRawPalette = function(palette){
+	return palette.map(function(c){ return c.name.split(',')})
   }
 
   /**
@@ -93,7 +101,9 @@
 
               success && success({
                 dominant: makeRGB(colors.dominant.name),
-                palette:  mapPalette(colors.palette)
+                dominantRaw: makeRawRGB(colors.dominant.name),
+                palette:  mapPalette(colors.palette),
+                paletteRaw:  mapRawPalette(colors.palette)
               });
     });
   }
